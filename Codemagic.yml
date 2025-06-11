@@ -1,0 +1,22 @@
+workflows:
+  build-release:
+    name: Build APK & AAB
+    max_build_duration: 20
+    environment:
+      flutter: stable
+      xcode: latest
+      android_signing:
+        keystore_reference: MY_KEYSTORE
+      vars:
+        PACKAGE_NAME: "com.example.bolakita"
+    scripts:
+      - flutter pub get
+      - flutter build apk --release
+      - flutter build appbundle --release
+    artifacts:
+      - build/app/outputs/flutter-apk/app-release.apk
+      - build/app/outputs/bundle/release/app-release.aab
+    publishing:
+      email:
+        recipients:
+          - rakap3273@gmail.com
